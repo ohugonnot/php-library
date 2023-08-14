@@ -1,0 +1,16 @@
+{
+    "require": {
+        "league/csv": "9.9",
+        "stichoza/google-translate-php": "^5.1",
+        "openai-php/client": "^0.6.4"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^6.3",
+        "phpunit/phpunit": "10"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    }
+}
