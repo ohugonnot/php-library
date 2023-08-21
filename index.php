@@ -4,46 +4,7 @@ require_once __DIR__.'/vendor/autoload.php';
 require_once "Book.php";
 require_once "Bibliotheque.php";
 
-use League\Csv\Reader;
-
-try {
-    // throw new Exception('Exception message');
-    $csvReader = Reader::createFromPath('books.csv', 'r');
-    $csvReader->setHeaderOffset(0);
-    $bookRecords = $csvReader->getRecords();
-    $books = [];
-    foreach($bookRecords as $bookRecord) {
-        $books[] = new Book($bookRecord);
-    }
-    $bibliotheque = new Bibliotheque($books);
-    dump($bibliotheque);
-} catch(Exception $e) {
-    $file = fopen("books.csv", 'rb');
-    $i = 0;
-    $headers = [];
-    $books = [];
-    while(!feof($file))
-    {
-        $book = fgetcsv($file);
-        if($i === 0) {
-            $i++;
-            $headers = $book;
-            continue;
-        }
-
-        if(is_array($book)) {
-            foreach($book as $k=>$value) {
-                $book[$headers[$k]] = $value;
-                unset($book[$k]);
-            }
-            $books[] = new Book($book);
-        }
-        $i++;
-    }
-    fclose($file);
-    $bibliotheque = new Bibliotheque($books);
-}
-
+$bibliotheque = new Bibliotheque("books.csv");
 if(isset($_GET['search'])) {
     $bibliotheque->search($_GET['search']);
 }
@@ -252,7 +213,7 @@ if(isset($_GET['sortBy'])) {
             <div class="field__search">
                 <?php foreach ($_GET as $k => $v) {
                     if($k !== "search") { ?>
-                    <input type="hidden" name="<?= $k ?>" value="<?= $v ?>" placeholder="Search entire store here...">
+                    <input type="hidden" name="<?= $k ?>" value="<?= $v ?>">
                 <?php }
                 } ?>
                 <input type="text" name="search" placeholder="Search entire store here...">
