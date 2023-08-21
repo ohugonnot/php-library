@@ -13,5 +13,12 @@ Il faudra également pouvoir filtrer par genre en cliquant sur le menu de gauche
 La recherche doit permettre d'afficher les livres dont la description, le titre ou l'auteur corresponde en totalité ou en partie à la recherche.       
 Vous devrez pouvoir également trier par titre, auteur et rating.      
 Vous devrez pouvoir cumuler la recherche avec le filtrage par genre.       
+
+Fonction PHP utiles pour l'exercice.
+- usort (trier un array avec une fonction anonyme sur mesure)
+- in_array (vérifier si un array contient une valeur)
+- array_filter (filter un array en enlevant les valeurs qui ne corresponde pas a un test)
+- array_map (appliquer une fonction sur l'ensemble d'un array)
+- str_contains (vérifier si un string contient une chaine de charactères)
     
 Bonne chance      
