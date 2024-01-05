@@ -128,11 +128,53 @@ class Bibliotheque
 
     public function search(string $search): self
     {
+        // Je filtre par autheur correspondant à la recherche et je sauve les books restant
+        $books_author = $this->findBooksByAuthor($search)->selected_books;
+        // je réintialise ma bibliothèque pour que la recherche se fasse dans tous les livres a nouveau
+        $this->selected_books = $this->books;
+        // Je filtre par titre et je sauve les books restant
+        $books_title = $this->findBooksByTitle($search)->selected_books;
+        // je réintialise ma bibliothèque pour que la recherche se fasse dans tous les livres a nouveau
+        $this->selected_books = $this->books;
+        // Je filtre par description et je sauve les books restant
+        $books_description = $this->findBooksByDescription($search)->selected_books;
 
+        // Je définis que les books selectionnés sont l'ensemble des réponses précedentes
+        // auquel je retire les eventuels doublons qui aurait marché a plusieurs recherche
+        $this->selected_books = array_unique(array_merge($books_author,$books_title,$books_description),SORT_REGULAR);
+        return $this;
     }
 
     public function sortBy(string $param): self
     {
+        // J'utilise la fonction usort pour trier mes books selectionnés
+       usort($this->selected_books, static function ($book1, $book2) use ($param) {
+           if (isset($book1->$param, $book2->$param)) {
+                $value1 = $book1->$param;
+                $value2 = $book2->$param;
 
+                // Si je veux trier par notes, je veux que la note la plus haute soit en premier
+                // Donc j'inverse la selection pour trier de manière DESC
+                if($param === "rating") {
+                    $value1 = $book2->$param;
+                    $value2 = $book1->$param;
+                }
+
+                // Pour trier je dois répondre 1 si la première valeur et plus grande que la deuxieme
+               if ($value1 > $value2) {
+                   return 1;
+               }
+
+               // Moins un si la seconde valeur et plus petite que la première
+               if($value2 > $value1) {
+                   return -1;
+               }
+
+               // 0 si les valeurs sont égales
+               return 0;
+           }
+           return 0;
+       });
+       return $this;
     }
 }
