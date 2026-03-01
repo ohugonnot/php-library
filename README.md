@@ -1,6 +1,6 @@
 # PHP Library
 
-Bibliothèque de livres en PHP orienté objet. Parse un CSV de 100 livres, les expose via des classes métier et génère une interface web avec filtres, recherche et tri.
+Exercice pédagogique conçu et donné à mes étudiants lors de mon activité de formateur développeur web. Objectif : pratiquer la POO PHP sur un cas concret — parser un CSV de 100 livres, les exposer via des classes métier et générer une interface web avec filtres, recherche et tri.
 
 ## Fonctionnalités
 
