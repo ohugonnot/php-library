@@ -1,21 +1,48 @@
-## PHP Library
+# PHP Library — Exercice
 
-Pour s'entrainer au POO en php nous allons créer un site de consultation de livres présents dans une bibliothèque.     
-Pour cela nous allons utiliser un fichier book.csv contenant les 100 livres les plus lus.     
-      
-Le but de l'exercice est d'extraire les 100 livres automatiquement et de créer une classe Livre avec les principales caractéristiques des ouvrages et de générer un array d'objet Livre.     
-Il faudra ensuite injecter ses livres dans une classe Bibliothèque que nous travaillerons ensuite pour créer le front de notre bibliothèque.    
-      
-En s'inspirant du Template https://template.hasthemes.com/boighor/boighor/shop-grid.html vous créerez un site web type Bibliothèque avec les livres présents dans la classe Bibliothèque.       
-Le front doit utiliser les classes Livre et Bibliothèque pour dynamiser le contenu de la page afin de factoriser et d'encapsuler un maximum de code. 
-      
-Le but est :
-- Afficher la liste des 100 livres avec Image, Etoiles, Description, Titre, Auteur
-- Afficher la liste des genres dans le menu de gauche avec le nombre d'ouvrages par genre.       
-- Pouvoir filtrer par genre en cliquant sur le menu de gauche
-- Faire fonctionner la recherche en haut du site pour chercher dans les ouvrages.      
-La recherche doit permettre d'afficher les livres dont la description, le titre ou l'auteur corresponde en totalité ou en partie à la recherche.       
-- Puvoir trier par titre, auteur et rating.      
-- Pouvoir cumuler la recherche avec le filtrage par genre.       
-    
-Bonne chance      
+Exercice pédagogique conçu pour pratiquer la **POO en PHP** sur un cas concret.
+
+## Comment utiliser ce repo
+
+- **Branche `exercice`** (ici) — point de départ : structure de dossiers et classes vides à compléter
+- **Branche `solution`** — correction complète
+
+## Installation
+
+```bash
+composer install
+php -S localhost:8000 public/
+```
+
+## Objectif
+
+À partir d'un CSV de 100 livres (`books.csv`), tu dois :
+
+1. Compléter la classe `Livre` pour modéliser un livre (titre, auteur, genres, rating, image)
+2. Compléter la classe `Bibliotheque` qui :
+   - Parse le CSV et instancie les objets `Livre`
+   - Expose la liste des genres avec le nombre d'ouvrages par genre
+   - Permet de filtrer les livres par genre
+   - Permet de rechercher dans le titre, l'auteur et la description
+   - Permet de trier par titre, auteur ou rating (asc/desc)
+   - Permet de cumuler filtre de genre + recherche
+3. Brancher les classes sur le `index.php` fourni pour afficher la bibliothèque
+
+## Structure fournie
+
+```
+application/
+├── class/
+│   ├── Bibliotheque.php   ← à compléter
+│   └── Livre.php          ← à compléter
+data/
+└── books.csv              ← les 100 livres
+public/
+└── index.php              ← front fourni, à ne pas modifier
+```
+
+## Stack
+
+- PHP 8 — POO pure
+- Composer / PSR-4 pour l'autoloading
+- [league/csv](https://csv.thephpleague.com/) pour le parsing CSV
